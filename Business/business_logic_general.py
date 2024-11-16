@@ -6,12 +6,11 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-import plotly.graph_objs as go
-import plotly.express as px
 
-# Librerias para implementar modelo KMeans
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import LabelEncoder
+# Librerias para implementar modelo KMeans, Hierarchical clustering
+from sklearn.cluster import KMeans, AgglomerativeClustering
+from sklearn.preprocessing import StandardScaler
+from scipy.cluster.hierarchy import linkage, dendrogram
 
 # Librerias para evaluar modelo
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
@@ -74,12 +73,14 @@ class General:
         plt.title(title)
         plt.show
 
+
     def grafica_dispersion_agrupada(Datos: pd.DataFrame, columna_x: str, columna_y: str, columna_grupo: str, title: str):
         plt.scatter(Datos[columna_x], Datos[columna_y], c=Datos[columna_grupo], cmap='viridis')
         plt.xlabel(columna_x)
         plt.ylabel(columna_y)
         plt.title(title)
         plt.show
+
 
     def grafica_de_codo(numero_clusters, score):
         plt.plot(numero_clusters, score, marker=MagicString.GRAFICA_CODO_MARKER)
@@ -88,6 +89,18 @@ class General:
         plt.title(MagicString.TITLE_GRAFICA_DE_CODO)
         plt.show
 
+
+    def graficar_dendrograma(linked):
+        plt.figure(figsize=(10,7))
+        dendrogram(linked, orientation="top", distance_sort="descending", show_leaf_counts=False)
+        plt.title(MagicString.DENDOGRAMA_HIERARCHICAL_CLUSTERING)
+        plt.xlabel(MagicString.MUESTRA_HIERARCHICAL_CLUSTERING)
+        plt.ylabel(MagicString.DISTANCIA_HIERARCHICAL_CLUSTERING)
+        plt.show()
+    
+    """
+        Implementacion para los algoritmos de KMeans y Hierarchical Clustering.
+    """
     def generar_clusters_y_score_kmeans(Datos: pd.DataFrame, rango_valor_minimo: int, rango_valor_maximo: int):
         numero_clusters = range(rango_valor_minimo, rango_valor_maximo)
 
@@ -103,6 +116,18 @@ class General:
 
         return Modelo
     
+
+    def generar_modelo_hierarchical_clustering(Datos: pd.DataFrame):
+        scaler = StandardScaler()
+        scaled_data = scaler.fit_transform(Datos)
+        linked = linkage(scaled_data, method="ward")
+        
+        model = AgglomerativeClustering(n_clusters=6, linkage="ward")
+        model.fit(scaled_data)
+        
+        return (linked,model)
+
+
     def evaluar_desempeño_modelo(Modelo, Datos: pd.DataFrame, columna: str, title_modelo: str):
         cantidad_elementos = len(Datos)
         X = Datos.drop(columna, axis=1)
@@ -121,3 +146,4 @@ class General:
         print("Coeficiente Silhouette:        {}".format(sil_score))
         print("Indice Calinski Harabasz:      {}".format(calinski_score))
         print("Indice Davies Bouldin:         {}".format(davies_score))
+

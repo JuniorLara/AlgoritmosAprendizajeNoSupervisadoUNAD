@@ -4,8 +4,15 @@ class MagicString:
     TITLE_GRAFICA_DE_CODO = 'Grafica de codo'
     TITLE_NUMERO_CLUSTER = 'Número de clusters'
     TITLE_SCORE = 'Score'
-
-    COLUMNA_KMEANS_GRUPO = 'Grupo'
+    TITLE_DESEMPENO_MODELO = "DESEMPEÑO MODELO (Edad, Salario Anual, Porcentaje gastos)"
+    TITLE_GRUPO_DATOS = "Grupo de Datos (Edad, Salario Anual, Porcentaje de gastos)"
+    
+    SEPARADOR_TEXTO_CONSOLA = "="
+    
+    DENDOGRAMA_HIERARCHICAL_CLUSTERING = "Dendrograma Hierarchical Clustering"
+    MUESTRA_HIERARCHICAL_CLUSTERING = "Muestras"
+    DISTANCIA_HIERARCHICAL_CLUSTERING = "Distancia"
+    COLUMNA_GRUPO = 'Grupo'
 
     #CUSTOMERS MALL URL
     CUSTOMERS_RUTA = './Datasets/Mall_Customers.csv'
