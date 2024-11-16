@@ -28,6 +28,6 @@ Para poder ejecutar este proyecto, asegúrate de tener instalados los siguientes
 ## Uso
 1. Clona este repositorio o descarga los archivos directamente desde la fuente.
 2. Abre **Anaconda Navigator** y lanza **Jupyter Notebook** desde la interfaz.
-3. Navega hasta la carpeta del proyecto y abre los archivos correspondientes (`customers.ipynb`).
+3. Navega hasta la carpeta del proyecto y abre los archivos correspondientes (`customer_k_means.ipynb`, `customer_hierarchical_clustering.ipynb`).
 4. Ejecuta las celdas en cada notebook para seguir el proceso de análisis y visualización de los datos.
 
